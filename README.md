@@ -34,7 +34,11 @@ npm run start
 ```
 For test running application
 
-GET http://localhost:3000/api/v1/tests/$find?locale=tr&organisation=company&application=test&select=name
+GET http://localhost:3000/api/v1/tests?locale=tr&organisation=company&application=test&select=name
+
+or
+
+GET http://localhost:3000/api/v1/tests/$find?locale=tr&organisation=company&application=test&search=localized
 
 ## Running the tests
 
