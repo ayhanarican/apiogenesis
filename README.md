@@ -1,7 +1,7 @@
 # apiogenesis
 A Restful API builder from a json schema. This project using restify@8.3.3 and mongoose@5.5.11.
 
-They interrogate the module author under spotlights. I did this project, but don't do it!
+They question such dynamic module author under spotlights. I did this project, but don't do it!
 
 You are working from morning until evening to do what this module can do. Take time for some fun :)
 
