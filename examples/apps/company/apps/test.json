@@ -35,7 +35,7 @@
                             {
                                 "validator": "isLength",
                                 "arguments": [0, 64],
-                                "messages": {
+                                "message": {
                                     "en": "{PATH} length should not be more then 64!",
                                     "tr": "{PATH} maksimum uzunluğu 64 den fazla olmalıdır!"
                                 }
