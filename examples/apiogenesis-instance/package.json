@@ -1,0 +1,17 @@
+{
+  "name": "apiogenesis-instance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --inspect ./index.js --watch ./**/* --watch ../apiogenesis/**/* --watch ../apps/**/*",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "apiogenesis",
+    "instance"
+  ],
+  "author": "a.arican@msn.com",
+  "license": "MIT"
+}

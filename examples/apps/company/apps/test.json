@@ -1,0 +1,319 @@
+{
+    "name": "test",
+    "version": "0.0.1",
+    "locales": ["en", "tr"],
+    "options": {
+        "dbUri": "mongodb://localhost:27017/test_app",
+        "default": {
+            "locale": "tr"
+        }
+    },
+    "types": [
+        {
+            "name": "testdetail",
+            "base": null,
+            "abstract": true,
+            "singular": { "en": "Test Detail", "tr": "Test Detayı" },
+            "plural": { "en": "Test Details", "tr": "Test Detayları" },
+            "options": {
+                "defaultSort": "name",
+                "display": "$doc.name",
+                "populate": {
+                    "find": [],
+                    "findOne": []
+                }
+            },
+            "properties": [
+                {
+                    "name": "company",
+                    "type": "string",
+                    "title": { "en": "Company", "tr": "Firma" },
+                    "options": {
+                        "unique": false,
+                        "required": true,
+                        "validations": [
+                            {
+                                "validator": "isLength",
+                                "arguments": [0, 64],
+                                "message": {
+                                    "en": "{PATH} length should not be more then 64!",
+                                    "tr": "{PATH} maksimum uzunluğu 64 den fazla olmalıdır!"
+                                }
+                            }
+                        ]
+                    },
+                    "order": 10
+                },
+                {
+                    "name": "description",
+                    "type": "string",
+                    "title": { "en": "Description", "tr": "Açıklama" },
+                    "options": {
+                        "unique": false,
+                        "required": false
+                    },
+                    "order": 20
+                }
+                
+            ]
+        },
+        {
+            "name": "testadvanceddetail",
+            "base": "testdetail",
+            "abstract": true,
+            "singular": { "en": "Test Advanced Detail", "tr": "Test Advanced Detayı" },
+            "plural": { "en": "Test Advanced Details", "tr": "Test Advanced Detayları" },
+            "options": {
+                "defaultSort": "name",
+                "display": "$item.name",
+                "populate": {
+                    "find": [],
+                    "findOne": []
+                }
+            },
+            "properties": [
+                {
+                    "name": "industry",
+                    "type": "localized",
+                    "title": { "en": "Description", "tr": "Açıklama" },
+                    "options": {
+                        "unique": false,
+                        "required": false
+                    },
+                    "order": 15
+                }
+                
+            ]
+        },
+        {
+            "name": "test",
+            "singular": { "en": "Test", "tr": "Test" },
+            "plural": { "en": "Tests", "tr": "Testler" },
+            "options": {
+                "autopopulate": true,
+                "defaultSort": "name",
+                "display": "($doc.name)",
+                "tree": {
+                    "parent": "parent",
+                    "children": "tests",
+                    "maxDepth": 3
+                }
+            },
+            "properties": [
+                {
+                    "name": "parent",
+                    "type": "reference",
+                    "title": { "en": "Parent Test", "tr": "Bağlı Test" },
+                    "options": {
+                        "type": "test",
+                        "unique": false,
+                        "required": false,
+                        "validations": [
+                            {
+                                "validator": "isUUID",
+                                "message": {
+                                    "en": "{PATH} value must have a UUID format",
+                                    "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                                }
+                            }
+                        ]
+                    },
+                    "order": 10
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "title": { "en": "Name", "tr": "Adı" },
+                    "options": {
+                        "unique": true,
+                        "required": true,
+                        "validations": [
+                            {
+                                "validator": "matches",
+                                "arguments": ["^[A-Za-z0-9çğıöşüÇĞİÖŞÜ]+$", "g"],
+                                "message": {
+                                    "en": "name property must be valid! regex: /^[A-Za-z0-9-çğıöşüÇĞİÖŞÜ]+$/g",
+                                    "tr": "adı alanı geçerli bir isim olmalıdır! regex : /^[A-Za-z0-9-çğıöşüÇĞİÖŞÜ]+$/g"
+                                }
+                            }
+                        ]
+                    },
+                    "order": 20
+                },
+                {
+                    "name": "title",
+                    "type": "localized",
+                    "title": { "en": "Title", "tr": "Başlığı" },
+                    "options": {
+                        "unique": false,
+                        "required": false
+                    },
+                    "order": 30
+                },
+                {
+                    "name": "detail",
+                    "type": "object",
+                    "title": { "en": "Detail", "tr": "Detay" },
+                    "options": {
+                        "type": "testdetail",
+                        "unique": false,
+                        "required": false
+                    },
+                    "order": 40
+                },
+                {
+                    "name": "tests",
+                    "type": "collection",
+                    "options": {
+                        "type": "test",
+                        "reference": {
+                            "type": "test",
+                            "property": "parent"
+                        },
+                        "unique": false,
+                        "required": false
+                    },
+                    "order": 100
+                }
+            ]
+        },
+        {
+            "name": "complextest",
+            "base": "advancedtest",
+            "singular": { "en": "Complex Test", "tr": "Karmaşık Test" },
+            "plural": { "en": "Complex Tests", "tr": "Karmaşık Testler" },
+            "options": {
+                "display": "($doc.title ? $doc.title[$locale] : $doc.name)",
+                "autopopulate": true,
+                "populate": {
+                    "find": [],
+                    "findOne": []
+                }
+            },
+            "properties": []
+        },
+        {
+            "name": "advancedtest",
+            "base": "test",
+            "singular": { "en": "Advanced Test", "tr": "Gelişmiş Test" },
+            "plural": { "en": "Advanced Tests", "tr": "Gelişmiş Testler" },
+            "options": {
+                "display": "($doc.title ? $doc.title[$locale] : $doc.name)",
+                "autopopulate": true,
+                "populate": {
+                    "find": [],
+                    "findOne": []
+                }
+            },
+            "properties": [
+                {
+                    "name": "kind",
+                    "type": "string",
+                    "title": { "en": "Kind", "tr": "Çeşit" },
+                    "options": {
+                        "unique": false,
+                        "required": false,
+                        "trim": true,
+                        "validations": []
+                    },
+                    "order": 40
+                }
+            ]
+        }
+    ],
+    "data": [
+        {
+            "_id": 1,
+            "_type": "test",
+            "name": "test",
+            "deneme": "test",
+            "detail": {
+                "company": "Firma Sanayi Ticaret Tarım ve Hayvancılık Limited Şirketi",
+                "industry": {
+                    "en": "Agriculture and Livestock",
+                    "tr": "Tarım ve Hayvancılık"
+                },
+                "description": "Deneme testi yapıldı",
+                "test": "test"
+    
+            }
+        },
+        {
+            "_id": 2,
+            "_type": "advancedtest",
+            "name": "advancedtest",
+            "detail": {
+                "company": "Firma Sanayi Ticaret Tarım ve Hayvancılık Limited Şirketi",
+                "industry": {
+                    "en": "Agriculture and Livestock",
+                    "tr": "Tarım ve Hayvancılık"
+                },
+                "description": "Deneme testi yapıldı",
+                "test": "test"
+            }
+        },
+        {
+            "_id": 3,
+            "_type": "advancedtest",
+            "parent": 2,
+            "name": "advancedtest2",
+            "detail": {
+                "company": "Firma Sanayi Ticaret Tarım ve Hayvancılık Limited Şirketi",
+                "industry": {
+                    "en": "Agriculture and Livestock",
+                    "tr": "Tarım ve Hayvancılık"
+                },
+                "description": "Deneme testi yapıldı",
+                "test": "test"
+            }
+        },
+        {
+            "_id": 4,
+            "_type": "complextest",
+            "parent": 3,
+            "name": "localizedtest",
+            "kind": "chai",
+            "title": {
+                "en": "Localized Test",
+                "tr": "Yerelleştirilmiş Test"
+            },
+            "detail": {
+                "company": "Firma Sanayi Ticaret Tarım ve Hayvancılık Limited Şirketi",
+                "industry": {
+                    "en": "Agriculture and Livestock",
+                    "tr": "Tarım ve Hayvancılık"
+                },
+                "description": "Deneme testi yapıldı",
+                "test": "test"
+            }
+        },
+        {
+            "_id": 5,
+            "_type": "test",
+            "name": "şifonyer",
+            "detail": {
+                "company": "Firma Sanayi Ticaret Tarım ve Hayvancılık Limited Şirketi",
+                "industry": {
+                    "en": "Agriculture and Livestock",
+                    "tr": "Tarım ve Hayvancılık"
+                },
+                "description": "Deneme testi yapıldı",
+                "test": "test"
+            }
+        },
+        {
+            "_id": 6,
+            "_type": "test",
+            "name": "zaman",
+            "detail": {
+                "company": "Firma Sanayi Ticaret Tarım ve Hayvancılık Limited Şirketi",
+                "industry": {
+                    "en": "Agriculture and Livestock",
+                    "tr": "Tarım ve Hayvancılık"
+                },
+                "description": "Deneme testi yapıldı",
+                "test": "test"
+            }
+        }
+    ]
+}

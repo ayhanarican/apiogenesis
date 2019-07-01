@@ -1,0 +1,14 @@
+[
+    {
+        "name": "dynamic",
+        "title": {
+            "en": "Dynamic App",
+            "tr": "Dinamik Uygulama"
+        },
+        "description": {
+            "en": "An dynamic app using react",
+            "tr": "React kullanan dinamik bir uygulama"
+        },
+        "active": true
+    }
+]
