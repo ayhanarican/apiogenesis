@@ -38,7 +38,7 @@ npm test
 ```
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://gist.github.com/ayhanarican/cb0a2dc11934bedcfe2813ad01e4392e) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
