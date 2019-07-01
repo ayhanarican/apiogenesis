@@ -35,7 +35,7 @@
                             {
                                 "validator": "isLength",
                                 "arguments": [0, 64],
-                                "message": {
+                                "messages": {
                                     "en": "{PATH} length should not be more then 64!",
                                     "tr": "{PATH} maksimum uzunluğu 64 den fazla olmalıdır!"
                                 }
@@ -132,8 +132,8 @@
                                 "validator": "matches",
                                 "arguments": ["^[A-Za-z0-9çğıöşüÇĞİÖŞÜ]+$", "g"],
                                 "message": {
-                                    "en": "name property must be valid! regex: /^[A-Za-z0-9-çğıöşüÇĞİÖŞÜ]+$/g",
-                                    "tr": "adı alanı geçerli bir isim olmalıdır! regex : /^[A-Za-z0-9-çğıöşüÇĞİÖŞÜ]+$/g"
+                                    "en": "name property must be a valid name! regex: /^[A-Za-z0-9-çğıöşüÇĞİÖŞÜ]+$/g",
+                                    "tr": "name alanı geçerli bir isim olmalıdır! regex : /^[A-Za-z0-9-çğıöşüÇĞİÖŞÜ]+$/g"
                                 }
                             }
                         ]
