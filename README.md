@@ -8,3 +8,49 @@ A Restful API builder from json schema! Using restify@8.3.3 and mongoose@5.5.11
 * Multiple sort
 * Search in searchable paths
 * Filtering, paging same with mongoose find
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+
+### Installing example project
+
+A step by step series of examples that tell you how to get a development env running
+
+Say what the step will be
+
+```
+git clone https://github.com/ayhanarican/apiogenesis.git
+cd apiogenesis
+npm install
+
+cd examples/apiogenesis-instance
+npm install
+npm run start
+```
+
+## Running the tests
+
+To run test
+
+```
+npm test
+```
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ayhanarican/apiogenesis/tags). 
+
+## Authors
+
+* **Ayhan ARICAN** - *Initial work* - [ayhanarican](https://github.com/ayhanarican)
+
+See also the list of [contributors](https://github.com/ayhanarican/apiogenesis/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
