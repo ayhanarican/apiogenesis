@@ -65,7 +65,7 @@
             "plural": { "en": "Test Advanced Details", "tr": "Test Advanced Detayları" },
             "options": {
                 "defaultSort": "name",
-                "display": "$item.name",
+                "display": "$doc.name",
                 "populate": {
                     "find": [],
                     "findOne": []
