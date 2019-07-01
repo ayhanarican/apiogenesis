@@ -3,7 +3,7 @@
     "singular": { "en": "Audit", "tr": "Audit" },
     "plural": { "en": "Audit", "tr": "Audit" },
     "options": {
-        "display": "$item.action + ' on ' + $item.date.toString() + ' by user: ' + $item.user.name",
+        "display": "$doc.action + ' on ' + $doc.date.toString() + ' by user: ' + $doc.user.name",
         "autopopulate": true,
         "populate": {
             "find": [],

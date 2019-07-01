@@ -4,7 +4,7 @@
     "singular": { "en": "Root", "tr": "Kök" },
     "plural": { "en": "Root", "tr": "Kök" },
     "options": {
-        "display": "$item._type + ' [' + $item._id + ']",
+        "display": "$doc._type + ' [' + $doc._id + ']",
         "populate": {
             "find": [
                 {

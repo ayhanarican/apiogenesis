@@ -3,7 +3,7 @@
     "singular": { "en": "Key", "tr": "Anahtar" },
     "plural": { "en": "Keys", "tr": "Anahtarlar" },
     "options": {
-        "display": "$item.type + ' ' + $item.sid + ': ' + $item.oid",
+        "display": "$doc.type + ' ' + $doc.sid + ': ' + $doc.oid",
         "populate": {
             "find": [],
             "findOne": []

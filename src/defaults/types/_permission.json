@@ -9,7 +9,7 @@
         "tr": "Yetkiler"
     },
     "options": {
-        "display": "($item.action ? $item.action + ' ' : '') + ($item.type ? $item.type + ' ' : '') + ' ' + $item.perm",
+        "display": "($doc.action ? $doc.action + ' ' : '') + ($doc.type ? $doc.type + ' ' : '') + ' ' + $doc.perm",
         "defaultSort": "_createdAt",
         "autopopulate": true,
         "populate": {

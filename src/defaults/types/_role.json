@@ -3,7 +3,7 @@
     "singular": { "en": "Role", "tr": "Rol" },
     "plural": { "en": "Roles", "tr": "Roller" },
     "options": {
-        "display": "$item.name",
+        "display": "$doc.name",
         "autopopulate": true,
         "populate": {
             "find": [],
