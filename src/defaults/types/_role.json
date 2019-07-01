@@ -1,0 +1,95 @@
+{
+    "name": "_role",
+    "singular": { "en": "Role", "tr": "Rol" },
+    "plural": { "en": "Roles", "tr": "Roller" },
+    "options": {
+        "display": "$item.name",
+        "autopopulate": true,
+        "populate": {
+            "find": [],
+            "findOne": []
+        }
+    },
+    "properties": [
+        {
+            "name": "org",
+            "type": "string",
+            "options": {
+                "unique": false,
+                "required": true
+            }
+        },
+        {
+            "name": "app",
+            "type": "string",
+            "options": {
+                "unique": false,
+                "required": true
+            }
+        },
+        {
+            "name": "name",
+            "type": "string",
+            "options": {
+                "unique": true,
+                "required": true
+            }
+        },
+        {
+            "name": "level",
+            "type": "number",
+            "options": {
+                "unique": false,
+                "required": true
+            }
+        },
+        {
+            "name": "isSystemAdmin",
+            "type": "boolean",
+            "options": {
+                "unique": false,
+                "required": false
+            }
+        },
+        {
+            "name": "isOrganisationAdmin",
+            "type": "boolean",
+            "options": {
+                "unique": false,
+                "required": false
+            }
+        },
+        {
+            "name": "isApplicationAdmin",
+            "type": "boolean",
+            "options": {
+                "unique": false,
+                "required": false
+            }
+        },
+        {
+            "name": "isAdmin",
+            "type": "calculated",
+            "options": {
+                "type": "boolean",
+                "expression": "($item.isSystemAdmin || $item.isOrganisationAdmin || $item.isApplicationAdmin) ? true: false",
+                "unique": false,
+                "required": false
+            }
+        },
+        {
+            "name": "permissions",
+            "type": "collection",
+            "options": {
+                "type": "_permission",
+                "reference": {
+                    "type": "_role",
+                    "property": "role"
+                },
+                "autopopulate": true,
+                "unique": false,
+                "required": false
+            }
+        }
+    ]
+}

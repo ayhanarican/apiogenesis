@@ -1,0 +1,190 @@
+{
+    "inList": {
+        "en": "{PATH} value in list: {ARGS[0]}",
+        "tr": "{PATH} değerli listenin içerisinde olmalıdır! Liste: {ARGS[0]}"
+    },
+    "isPropertyName": {
+        "en": "{PATH} value must be a property name of selected type!",
+        "tr": "{PATH} değeri seçilen tipin bir alanı olmalıdır!"
+    },
+    "equals": {
+        "en": "{PATH} value not equal!",
+        "tr": "{PATH} değeri {ARGS[0]} değerine eşit değildir!"
+    },
+    "contains": {
+        "en": "{PATH} value have invalid characters!",
+        "tr": "{PATH} değeri geçersiz karakterlere sahiptir!"
+    },
+    "matches": {
+        "en": "{PATH} value does not match with {ARGS[0]}!",
+        "tr": "{PATH} değeri {ARGS[0]} ile eşleşmedi!"
+    },
+    "isEmail": {
+        "en": "{PATH} value must have a valid email address format!",
+        "tr": "{PATH} değeri geçerli bir e-posta adresi olmalıdır!"
+    },
+    "isFQDN": {
+        "en": "{PATH} value must have a valid domain name (FQDN)!",
+        "tr": "{PATH} değeri geçerli bir alan adına (FQDN) sahip olmalıdır! "
+    },
+    "isIP": {
+        "en": "{PATH} value must have a valid IP address format!",
+        "tr": "{PATH} değeri geçerli bir IP adresi olmalıdır!"
+    },
+    "isAlpha": {
+        "en": "{PATH} value must have valid alpha characters!",
+        "tr": "{PATH} değeri geçerli alfa karakterler içermelidir!"
+    },
+    "isNumeric": {
+        "en": "{PATH} value must have a valid number format!",
+        "tr": "{PATH} değeri geçerli bir sayı olmalıdır!"
+    },
+    "isAlphanumeric": {
+        "en": "{PATH} value must have valid alpha numeric characters!",
+        "tr": "{PATH} değeri geçerli alfa numerik karakterler içermelidir!"
+    },
+    "isBase64": {
+        "en": "{PATH} value have a valid base64 format!",
+        "tr": "{PATH} değeri geçerli base64 formatına sahip olmalıdır!"
+    },
+    "isHexadecimal": {
+        "en": "{PATH} value must have a valid hexadecimal format!",
+        "tr": "{PATH} değeri geçersiz onaltılık sayı formatına sahip olmalıdır!"
+    },
+    "isHexColor": {
+        "en": "{PATH} value must have a valid hexcolor value!",
+        "tr": "{PATH} değeri geçerli bir onaltılık renk değerine sahip olmalıdır!"
+    },
+    "isLowercase": {
+        "en": "{PATH} value must have lower case characters!",
+        "tr": "{PATH} değeri küçük harfler içermelidir!"
+    },
+    "isUppercase": {
+        "en": "{PATH} value must have upper case characters!",
+        "tr": "{PATH} değeri büyük harfler içermelidir!"
+    },
+    "isInt": {
+        "en": "{PATH} value is a invalid integer",
+        "tr": "{PATH} değeri gerçersiz bir tamsayıdır!"
+    },
+    "isFloat": {
+        "en": "{PATH} value is a invalid float",
+        "tr": "{PATH} değeri geçersiz bir noktalı sayıdır!"
+    },
+    "isDivisibleBy": {
+        "en": "{PATH} value not divisible {ARGS[0]} value!",
+        "tr": "{PATH} değeri {ARGS[0]} değerine bölünemez!"
+    },
+    "isLength": {
+        "en": "{PATH} value must range that beetween {ARGS[0]} and {ARGS[1]} values!",
+        "tr": "{PATH} değeri {ARGS[0]} ile {ARGS[1]} değerleri arasında olmalıdır!"
+    },
+    "isByteLength": {
+        "en": "{PATH} value must byte length that beetween {ARGS[0]} and {ARGS[1]} values!",
+        "tr": "{PATH} değeri byte uzunluğu{ARGS[0]} ile {ARGS[1]} değerleri arasında olmalıdır!"
+    },
+    "isUUID": {
+        "en": "{PATH} value must have a UUID format!",
+        "tr": "{PATH} değeri UUID formatında olmalıdır!"
+    },
+    "isAfter": {
+        "en": "{PATH} value invalid date",
+        "tr": "{PATH} değeri  "
+    },
+    "isBefore": {
+        "en": "{PATH} value invalid date",
+        "tr": "{PATH} değeri  "
+    },
+    "isIn": {
+        "en": "{PATH} value unexpected value or invalid argument",
+        "tr": "{PATH} değeri  "
+    },
+    "isCreditCard": {
+        "en": "{PATH} value invalid credit card",
+        "tr": "{PATH} değeri  "
+    },
+    "isISBN": {
+        "en": "{PATH} value invalid ISBN",
+        "tr": "{PATH} değeri  "
+    },
+    "isJSON": {
+        "en": "{PATH} value invalid JSON",
+        "tr": "{PATH} değeri  "
+    },
+    "isMultibyte": {
+        "en": "{PATH} value invalid Multibyte",
+        "tr": "{PATH} değeri  "
+    },
+    "isAscii": {
+        "en": "{PATH} value invalid ASCII characters",
+        "tr": "{PATH} değeri  "
+    },
+    "isFullWidth": {
+        "en": "{PATH} value does not contains full-width chars",
+        "tr": "{PATH} değeri  "
+    },
+    "isHalfWidth": {
+        "en": "{PATH} value does not contains half-width chars",
+        "tr": "{PATH} değeri  "
+    },
+    "isVariableWidth": {
+        "en": "{PATH} value does not contains a mixture of full and half-width chars",
+        "tr": "{PATH} değeri  "
+    },
+    "isSurrogatePair": {
+        "en": "{PATH} value does not contains any surrogate pairs chars",
+        "tr": "{PATH} değeri  "
+    },
+    "isBoolean": {
+        "en": "{PATH} value invalid boolean",
+        "tr": "{PATH} değeri  "
+    },
+    "isCurrency": {
+        "en": "{PATH} value invalid currency",
+        "tr": "{PATH} değeri  "
+    },
+    "isISIN": {
+        "en": "{PATH} value invalid ISIN",
+        "tr": "{PATH} değeri  "
+    },
+    "isMobilePhone": {
+        "en": "{PATH} value invalid mobile phone number",
+        "tr": "{PATH} değeri  "
+    },
+    "isMongoId": {
+        "en": "{PATH} value invalid MongoDB ID",
+        "tr": "{PATH} değeri  "
+    },
+    "isURL": {
+        "en": "{PATH} value invalid URL",
+        "tr": "{PATH} değeri  "
+    },
+    "isMACAddress": {
+        "en": "{PATH} value invalid MAC address",
+        "tr": "{PATH} değeri  "
+    },
+    "isDecimal": {
+        "en": "{PATH} value invalid decimal",
+        "tr": "{PATH} değeri  "
+    },
+    "isMD5": {
+        "en": "{PATH} value invalid MD5",
+        "tr": "{PATH} değeri  "
+    },
+    "isEmpty": {
+        "en": "{PATH} value not empty",
+        "tr": "{PATH} değeri  "
+    },
+    "isISSN": {
+        "en": "{PATH} value invalid ISSN",
+        "tr": "{PATH} değeri  "
+    },
+    "isISO8601": {
+        "en": "{PATH} value invalid ISO8601",
+        "tr": "{PATH} değeri  "
+    },
+    "isDataURI": {
+        "en": "{PATH} value invalid data URI format",
+        "tr": "{PATH} değeri  "
+    }
+}

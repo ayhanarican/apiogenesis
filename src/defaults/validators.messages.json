@@ -1,0 +1,6 @@
+{
+    "multipleUnique": {
+        "en": "{MODEL} document must be unique with this keys: {KEYS}",
+        "tr": "{MODEL} dokümanı şu anahtarlarla birlikte benzersiz olmalıdır! Anahtarlar: {KEYS}"
+    }
+}

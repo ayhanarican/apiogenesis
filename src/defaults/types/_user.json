@@ -1,0 +1,111 @@
+{
+    "name": "_user",
+    "singular": { "en": "User", "tr": "Kullanıcı" },
+    "plural": { "en": "Users", "tr": "Kullanıcılar" },
+    "options": {
+        "defaultSort": "name",
+        "display": "$item.name",
+        "autopopulate": true
+    },
+    "properties": [
+        {
+            "name": "authority",
+            "type": "object",
+            "options": {
+                "unique": false,
+                "required": true
+            }
+        },
+        {
+            "name": "name",
+            "type": "string",
+            "options": {
+                "unique": false,
+                "required": false
+            }
+        },
+        {
+            "name": "email",
+            "type": "string",
+            "options": {
+                "unique": true,
+                "required": true,
+                "validations": [
+                    {
+                        "validator": "isEmail",
+                        "message": {
+                            "en": "{PATH} must be valid email address",
+                            "tr": "{PATH} geçerli bir e-posta adresi olmalıdır"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "password",
+            "type": "string",
+            "options": {
+                "unique": false,
+                "required": true,
+                "select": false
+            }
+        },
+        {
+            "name": "role",
+            "type": "reference",
+            "options": {
+                "type": "_role",
+                "unique": false,
+                "required": true,
+                "validations": [
+                    {
+                        "validator": "isUUID",
+                        "message": {
+                            "en": "{PATH} value must have a UUID format",
+                            "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "active",
+            "type": "boolean",
+            "options": {
+                "unique": false,
+                "required": true
+            }
+        },
+        {
+            "name": "confirmed",
+            "type": "boolean",
+            "options": {
+                "unique": false,
+                "required": false,
+                "readonly": true
+            }
+        },
+        {
+            "name": "roles",
+            "type": "collection",
+            "options": {
+                "type": "_userrole",
+                "many": true,
+                "reference": {
+                    "type": "_user",
+                    "property": "user"
+                },
+                "collection": {
+                    "type": "_userrole",
+                    "property": "role",
+                    "reference": {
+                        "type": "_role",
+                        "property": "role"
+                    }
+                },
+                "unique": false,
+                "required": true
+            }
+        }
+    ]
+}

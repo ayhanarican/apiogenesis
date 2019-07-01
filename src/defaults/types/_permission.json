@@ -1,0 +1,149 @@
+{
+    "name": "_permission",
+    "singular": {
+        "en": "Permission",
+        "tr": "Yetki"
+    },
+    "plural": {
+        "en": "Permissions",
+        "tr": "Yetkiler"
+    },
+    "options": {
+        "display": "($item.action ? $item.action + ' ' : '') + ($item.type ? $item.type + ' ' : '') + ' ' + $item.perm",
+        "defaultSort": "_createdAt",
+        "autopopulate": true,
+        "populate": {
+            "find": [],
+            "findOne": []
+        }
+    },
+    "properties": [
+        {
+            "name": "role",
+            "type": "reference",
+            "options": {
+                "type": "_role",
+                "unique": false,
+                "required": true,
+                "validations": [
+                    {
+                        "validator": "isUUID",
+                        "message": {
+                            "en": "{PATH} value must have a UUID format",
+                            "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                        },
+                        "passIfEmpty": true
+                    },
+                    {
+                        "validator": "existsReference",
+                        "message": {
+                            "en": "Invalid Reference! {PATH} is not in db! {PATH}: {VALUE}",
+                            "tr": "Geçersiz referans! {PATH} db'de yok! {PATH}: {VALUE}"
+                        }
+                    },
+                    {
+                        "validator": "multipleUnique",
+                        "arguments": [{ "path": "type", "insensitive": true }, "property", "action", "perm"],
+                        "message": {
+                            "en": "This permission has already been defined!",
+                            "tr": "Bu yetki daha önce tanımlanmış!"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "type",
+            "type": "string",
+            "options": {
+                "default": "*",
+                "unique": false,
+                "required": false,
+                "validations": [
+                    {
+                        "validator": "inList",
+                        "arguments": [
+                            "$app.types.map(type => type.name).concat(['*'])"
+                        ],
+                        "message": {
+                            "en": "{PATH} value must be a model type name or asterisk (*) character!",
+                            "tr": "{PATH} değeri model tip ismi yada yıldız (*) karakteri olmalıdır!"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "property",
+            "type": "string",
+            "options": {
+                "default": "*",
+                "unique": false,
+                "required": false,
+                "validations": [
+                    {
+                        "validator": "isPropertyNameOrAsteriskIfHasType",
+                        "message": {
+                            "en": "{PATH} value must be a property name of selected type or asterisk (*) character!",
+                            "tr": "{PATH} değeri seçilen tipin bir alanı yada yıldız (*) karakteri olmalıdır!"
+                        },
+                        "passIfEmpty": true
+                    }
+                ]
+            }
+        },
+        {
+            "name": "action",
+            "type": "string",
+            "options": {
+                "default": "*",
+                "unique": false,
+                "required": false,
+                "validations": [
+                    {
+                        "validator": "inList",
+                        "arguments": [
+                            "$app.options.default.defaults.actions.all.map(action => action.name).concat(['*'])"
+                        ],
+                        "message": {
+                            "en": "{PATH} value must be a action name or asterisk character!",
+                            "tr": "{PATH} değeri bir eylem ismi yada yıldız (*) karakteri olmalıdır!"
+                        },
+                        "passIfEmpty": true
+                    }
+                ]
+            }
+        },
+        {
+            "name": "perm",
+            "type": "string",
+            "options": {
+                "default": "allow",
+                "unique": false,
+                "required": true,
+                "validations": [
+                    {
+                        "validator": "inList",
+                        "arguments": [
+                            "$app.options.default.defaults.perms.map(perm => perm.name)"
+                        ],
+                        "message": {
+                            "en": "{PATH} value must be a perm name! Perms: allow, deny",
+                            "tr": "{PATH} değeri bir izin ismi olmalıdır! İzinler: allow, deny"
+                        },
+                        "passIfEmpty": true
+                    }
+                ]
+            }
+        },
+        {
+            "name": "constraint",
+            "type": "mixed",
+            "options": {
+                "control": "jsoneditor",
+                "unique": false,
+                "required": false
+            }
+        }
+    ]
+}

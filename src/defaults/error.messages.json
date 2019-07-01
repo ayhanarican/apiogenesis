@@ -1,0 +1,26 @@
+{
+    "buildError": {
+        "en": "Build error: ",
+        "tr": "Build hatası: "
+    },
+    "requestError": {
+        "en": "Request error: ",
+        "tr": "İstek hatası: "
+    },
+    "createError": {
+        "en": "Create error: ",
+        "tr": "Yeni kayıt hatası: "
+    },
+    "updateError": {
+        "en": "Update error: ",
+        "tr": "Kayıt güncelleme hatası: "
+    },
+    "deleteError": {
+        "en": "Delete error: ",
+        "tr": "Kayıt silme hatası: "
+    },
+    "unknownPropertyError": {
+        "en": "Unknown property error: ",
+        "tr": "Tanınmayan alan hatası: "
+    }
+}

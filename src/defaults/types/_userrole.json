@@ -1,0 +1,80 @@
+{
+    "name": "_userrole",
+    "singular": {
+        "en": "User role",
+        "tr": "Kullanıcı rolü"
+    },
+    "plural": {
+        "en": "User roles",
+        "tr": "Kullanıcı rolleri"
+    },
+    "options": {
+        "display": "`${(typeof $item.role !== 'string' ? $item.role.name : '')}${(typeof $item.role !== 'string' && typeof $item.user !== 'string' ? ' - ' : '')}${(typeof $item.user !== 'string' ? $item.user.name : '')}`",
+        "populate": {
+            "find": [
+                {
+                    "path": "user"
+                },
+                {
+                    "path": "role",
+                    "populate": [
+                        {
+                            "path": "permissions"
+                        }
+                    ]
+                }
+            ],
+            "findOne": [
+                {
+                    "path": "user"
+                },
+                {
+                    "path": "role",
+                    "populate": [
+                        {
+                            "path": "permissions"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "properties": [
+        {
+            "name": "role",
+            "type": "reference",
+            "options": {
+                "type": "_role",
+                "unique": false,
+                "required": true,
+                "validations": [
+                    {
+                        "validator": "isUUID",
+                        "message": {
+                            "en": "{PATH} value must have a UUID format",
+                            "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "user",
+            "type": "reference",
+            "options": {
+                "type": "_user",
+                "unique": false,
+                "required": true,
+                "validations": [
+                    {
+                        "validator": "isUUID",
+                        "message": {
+                            "en": "{PATH} value must have a UUID format",
+                            "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

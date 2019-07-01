@@ -1,0 +1,61 @@
+{
+    "name": "_key",
+    "singular": { "en": "Key", "tr": "Anahtar" },
+    "plural": { "en": "Keys", "tr": "Anahtarlar" },
+    "options": {
+        "display": "$item.type + ' ' + $item.sid + ': ' + $item.oid",
+        "populate": {
+            "find": [],
+            "findOne": []
+        }
+    },
+    "properties": [
+        {
+            "name": "type",
+            "type": "string",
+            "title": { "en": "Type", "tr": "Tip" },
+            "options": {
+                "required": true,
+                "unique": false,
+                "validations": [
+                    {
+                        "validator": "inList",
+                        "arguments": ["$app.types.map(typ => typ.name)"],
+                        "message": {
+                            "en": "{PATH} value must be a model type name or asterisk (*) character!",
+                            "tr": "{PATH} değeri model tip ismi yada yıldız (*) karakteri olmak zorundadır!"
+                        }
+                    }
+                ]
+
+            }
+        },
+        {
+            "name": "sid",
+            "type": "number",
+            "title": { "en": "Schema ID", "tr": "Şema ID" },
+            "options": {
+                "required": true,
+                "unique": false
+            }
+        },
+        {
+            "name": "oid",
+            "type": "string",
+            "title": { "en": "Object ID", "tr": "Nesne ID" },
+            "options": {
+                "required": true,
+                "unique": false,
+                "validations": [
+                    {
+                        "validator": "isUUID",
+                        "message": {
+                            "en": "{PATH} value must have a UUID format",
+                            "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

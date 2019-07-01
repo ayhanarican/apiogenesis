@@ -1,0 +1,118 @@
+{
+    "name": "_audit",
+    "singular": { "en": "Audit", "tr": "Audit" },
+    "plural": { "en": "Audit", "tr": "Audit" },
+    "options": {
+        "display": "$item.action + ' on ' + $item.date.toString() + ' by user: ' + $item.user.name",
+        "autopopulate": true,
+        "populate": {
+            "find": [],
+            "findOne": []
+        }
+    },
+    "properties": [
+        {
+            "name": "action",
+            "type": "string",
+            "title": { "en": "Action", "tr": "Eylem" },
+            "options": {
+                "required": true,
+                "unique": false,
+                "validations": [
+                    {
+                        "validator": "inList",
+                        "arguments": ["$app.options.default.defaults.actions.all.map(action => action.name)"],
+                        "message": {
+                            "en": "{PATH} value must be a action name or asterisk character!",
+                            "tr": "{PATH} değeri bir eylem ismi yada yıldız (*) karakteri olmalıdır!"
+                        },
+                        "passIfEmpty": true
+                    }
+                ]
+            }
+        },
+        {
+            "name": "type",
+            "type": "string",
+            "title": { "en": "Type", "tr": "Tip" },
+            "options": {
+                "required": true,
+                "validations": [
+                    {
+                        "validator": "isIn",
+                        "arguments": ["$app.types.map(typ => typ.name)"],
+                        "message": {
+                            "en": "{PATH} value must be a model type name or asterisk (*) character!",
+                            "tr": "{PATH} değeri model tip ismi yada yıldız (*) karakteri olmak zorundadır!"
+                        },
+                        "passIfEmpty": true
+                    }
+                ]
+            }
+        },
+        {
+            "name": "oid",
+            "type": "string",
+            "title": { "en": "Object Id", "tr": "Nesne Id" },
+            "options": {
+                "required": true,
+                "unique": false,
+                "validations": [
+                    {
+                        "validator": "isUUID",
+                        "message": {
+                            "en": "{PATH} value must have a UUID format",
+                            "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "date",
+            "type": "date",
+            "title": { "en": "Date", "tr": "Tarih" },
+            "options": {
+                "required": true,
+                "unique": false
+            }
+        },
+        {
+            "name": "old",
+            "type": "object",
+            "title": { "en": "Old data", "tr": "Eski veri" },
+            "options": {
+                "required": false,
+                "unique": false
+            }
+        },
+        {
+            "name": "new",
+            "type": "object",
+            "title": { "en": "New data", "tr": "Yeni veri" },
+            "options": {
+                "required": true,
+                "unique": false
+            }
+        },
+        {
+            "name": "user",
+            "type": "reference",
+            "title": { "en": "User", "tr": "Kullanıcı" },
+            "options": {
+                "type": "$defaults.types._user._type",
+                "required": false,
+                "unique": false,
+                "validations": [
+                    {
+                        "validator": "isUUID",
+                        "message": {
+                            "en": "{PATH} value must have a UUID format",
+                            "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

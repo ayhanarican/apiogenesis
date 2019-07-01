@@ -1,0 +1,200 @@
+{
+    "actions": {
+        "readable": [
+            {
+                "name": "findAll",
+                "type": "readable",
+                "result": "array"
+            },
+            {
+                "name": "find",
+                "type": "readable",
+                "result": "array"
+            },
+            {
+                "name": "findById",
+                "type": "readable",
+                "result": "object"
+            }
+        ],
+        "writable": [
+            {
+                "name": "create",
+                "type": "writable",
+                "result": "object"
+            },
+            {
+                "name": "update",
+                "type": "writable",
+                "result": "object"
+            },
+            {
+                "name": "delete",
+                "type": "writable",
+                "result": "object"
+            }
+        ],
+        "both": [
+            {
+                "name": "aggregate",
+                "type": "both",
+                "result": "mixed"
+            }  
+        ],
+        "all": [
+            {
+                "name": "findAll",
+                "type": "readable",
+                "result": "array"
+            },
+            {
+                "name": "find",
+                "type": "readable",
+                "result": "array"
+            },
+            {
+                "name": "findById",
+                "type": "readable"
+            },
+            {
+                "name": "create",
+                "type": "writable",
+                "result": "object"
+            },
+            {
+                "name": "update",
+                "type": "writable",
+                "result": "object"
+            },
+            {
+                "name": "delete",
+                "type": "writable",
+                "result": "object"
+            },
+            {
+                "name": "aggregate",
+                "type": "both",
+                "result": "mixed"
+            }    
+        ]
+    },
+    "perms": [
+        {
+            "name": "deny",
+            "type": "perm"
+        },
+        {
+            "name": "allow",
+            "type": "perm"
+        },
+        {
+            "name": "aggrementRequired",
+            "type": "perm"
+        }
+    ],
+    "errors": {
+        "requestError": {
+            "en": "Request error: ",
+            "tr": "İstek hatası: "
+        },
+        "createError": {
+            "en": "Create error: ",
+            "tr": "Yeni kayıt hatası: "
+        },
+        "updateError": {
+            "en": "Update error: ",
+            "tr": "Kayıt güncelleme hatası: "
+        },
+        "deleteError": {
+            "en": "Delete error: ",
+            "tr": "Kayıt silme hatası: "
+        },
+        "aggregateError": {
+            "en": "Aggregate error: ",
+            "tr": "Toplam hatası: "
+        },
+        "unknownPropertyError": {
+            "en": "Unknown property error: ",
+            "tr": "Tanınmayan alan hatası: "
+        },
+        "unknownPropertyInItem": {
+            "en": "`There are unknown propert${properties.length ? 'ies' : 'y'}! Propert${properties.length ? 'ies' : 'y'}: ${properties}`",
+            "tr": "`Öğelerde tanınmayan alan${properties.length ? 'lar' : ''} var! Alan${properties.length ? 'lar' : ''}: ${properties}`"
+        },
+        "mongooseValidationRequired": {
+            "en": "`{PATH}` property is required!",
+            "tr": "`{PATH}` alanı gereklidir!"
+        },
+        "mongooseValidationUnique": {
+            "en": "`{PATH}` must to be unique. Value: `{VALUE}`",
+            "tr": "`{PATH}` alanının benzersiz olması gerekir. Value: `{VALUE}`"
+        }
+    },
+    "types": {
+        "_root": {
+            "__type": "_root",
+            "_type": "_type",
+            "_createdAt": "_createdAt",
+            "_modifiedAt": "_modifiedAt",
+            "_createdBy": "_createdBy",
+            "_modifiedBy": "_modifiedBy",
+            "_default": "_default",
+            "_demo": "_demo"
+        },
+        "_key": {
+            "_type": "_key",
+            "type": "type",
+            "sid": "sid",
+            "oid": "oid"
+        },
+        "_audit": {
+            "_type": "_audit",
+            "action": "action",
+            "type": "type",
+            "property": "property",
+            "date": "date",
+            "user": "user"
+        },
+        "_user": { 
+            "_type": "_user",
+            "name": "name",
+            "email": "email",
+            "password": "password",
+            "role": "role",
+            "roles": "roles",
+            "active": "active",
+            "confirmed": "confirmed"
+        },
+        "_role": {
+            "_type": "_role",
+            "org": "org",
+            "app": "app",
+            "name": "name",
+            "level": "level",
+            "permissions": "permissions"
+        },
+        "_userrole": {
+            "_type": "_userrole",
+            "user": "user",
+            "role": "role"
+        },
+        "_permission": {
+            "_type": "_permission",
+            "role": "role",
+            "type": "type",
+            "action": "action",
+            "perm": "perm",
+            "constraint": "constraint"
+        }
+    },
+    "properties": [
+        "_id",
+        "_type", 
+        "_default", 
+        "_demo", 
+        "_createdAt", 
+        "_modifiedAt", 
+        "_createdBy", 
+        "_modifiedBy"
+    ]
+}

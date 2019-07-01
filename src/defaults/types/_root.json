@@ -1,0 +1,155 @@
+{
+    "name": "_root",
+    "abstract": true,
+    "singular": { "en": "Root", "tr": "Kök" },
+    "plural": { "en": "Root", "tr": "Kök" },
+    "options": {
+        "display": "$item._type + ' [' + $item._id + ']",
+        "populate": {
+            "find": [
+                {
+                    "path": "_createdBy"
+                },
+                {
+                    "path": "_modifiedBy"
+                }
+            ],
+            "findOne": [
+                {
+                    "path": "_createdBy"
+                },
+                {
+                    "path": "_modifiedBy"
+                }
+            ]
+        }
+    },
+    "properties": [
+        {
+            "name": "_type",
+            "type": "string",
+            "title": { "en": "Type", "tr": "Tip" },
+            "options": {
+                "default": "",
+                "required": true,
+                "unique": false,
+                "validations": [
+                    {
+                        "validator": "inList",
+                        "arguments": ["$app.types.map(typ => typ.name)"],
+                        "message": {
+                            "en": "{PATH} value must be a model type name character!",
+                            "tr": "{PATH} değeri model tip ismi olmak zorundadır!"
+                        }
+                    }
+                ]
+
+            }
+        },
+        {
+            "name": "_type_localized",
+            "type": "calculated",
+            "title": { "en": "Type", "tr": "Varlık türü" },
+            "options": {
+                "type": "string",
+                "expression": "$type.singular[$locale]",
+                "required": false,
+                "unique": false
+            }
+        },
+        {
+            "name": "_createdAt",
+            "type": "date",
+            "title": { "en": "Created Date", "tr": "Oluşturulma Tarihi" },
+            "options": {
+                "required": true,
+                "unique": false
+
+            },
+            "validations": [
+                {
+                    "validator": "isDate",
+                    "message": {
+                        "en": "{PATH} value type must be a date!",
+                        "tr": "{PATH} değeri tipi bir tarih olmalıdır!"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "_modifiedAt",
+            "type": "date",
+            "title": { "en": "Created Date", "tr": "Oluşturulma Tarihi" },
+            "options": {
+                "required": true,
+                "unique": false
+
+            },
+            "validations": [
+                {
+                    "validator": "isDate",
+                    "message": {
+                        "en": "{PATH} value type must be a date!",
+                        "tr": "{PATH} değeri tipi bir tarih olmalıdır!"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "_createdBy",
+            "type": "string",
+            "title": { "en": "Created By", "tr": "Oluşturan" },
+            "options": {
+                "required": true,
+                "unique": false
+            },
+            "validations": [
+                {
+                    "validator": "isUUID",
+                    "message": {
+                        "en": "{PATH} value type must have a UUID format!",
+                        "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "_modifiedBy",
+            "type": "string",
+            "title": { "en": "Modified By", "tr": "Değiştiren" },
+            "options": {
+                "required": true,
+                "unique": false
+
+            },
+            "validations": [
+                {
+                    "validator": "isUUID",
+                    "message": {
+                        "en": "{PATH} value type must have a UUID format!",
+                        "tr": "{PATH} değeri UUID formatında olmalıdır!"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "_default",
+            "type": "boolean",
+            "title": { "en": "Default", "tr": "Varsayılan" },
+            "options": {
+                "default": "false",
+                "required": false,
+                "unique": false
+            }
+        },
+        {
+            "name": "_demo",
+            "type": "boolean",
+            "title": { "en": "Demo", "tr": "Demo" },
+            "options": {
+                "required": false,
+                "unique": false
+            }
+        }
+    ]
+}
