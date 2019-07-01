@@ -8,7 +8,7 @@ You are working from morning until evening to do what this module can do. Take t
 * Relational mongodb database
 * Tree structure
 * Multiple sort
-* Search in searchable paths
+* Searching in searchable paths
 * Filtering, paging same with mongoose find
 
 ## Getting Started
