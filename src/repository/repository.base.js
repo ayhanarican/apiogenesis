@@ -645,11 +645,11 @@ class RepositoryBase extends BaseClass {
             const $app = this.app;
             const $type = type;
             const $locale = this.locale;
-            const $item = _item;
-            const $this = $item;
+            const $doc = _item;
+            const $this = $doc;
 
-            const argsNames = ['$app', '$type', '$locale', '$item', '$this'];
-            const argsValues = [$app, $type, $locale, $item, $this];
+            const argsNames = ['$app', '$type', '$locale', '$doc', '$this'];
+            const argsValues = [$app, $type, $locale, $doc, $this];
 
 
             const body = "return " + expression;
