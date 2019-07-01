@@ -1,5 +1,5 @@
 # apiogenesis
-A Restful API builder from a json schema. This project using restify@8.3.3 and mongoose@5.5.11.
+A dynamic Restful API builder from a json schema. This project using restify@8.3.3 and mongoose@5.5.11.
 
 They probably question such dynamic module author under spotlights. I did this project, but you don't do it!
 
