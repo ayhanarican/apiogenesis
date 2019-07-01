@@ -12,6 +12,6 @@ const apiogenesis = new Apiogenesis({
 
 apiogenesis.start(3000);
 
-/**
- * Request GET http://localhost:3000/api/v1/tests?locale=en&organisation=company&application=test
- */
+
+ // For test request GET http://localhost:3000/api/v1/tests?locale=en&organisation=company&application=test
+ // For test request GET http://localhost:3000/api/v1/tests?locale=en&organisation=company&application=test&select=name
