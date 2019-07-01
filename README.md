@@ -5,7 +5,7 @@ They probably question such dynamic module author under spotlights. I did this p
 
 You spend a lot of time on projects. Get some rest! Take time for some fun :)
 
-## Supports
+## Features
 * Multi language contents
 * Relational mongodb database
 * Tree structure
