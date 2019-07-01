@@ -15,7 +15,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing example project
 
-A step by step series of examples that tell you how to get a development env running
+A step by step series of examples that tell you how to get a development env running.
 
 Follow these simple steps to run the example application.
 
@@ -28,6 +28,9 @@ cd examples/apiogenesis-instance
 npm install
 npm run start
 ```
+For test running application
+
+GET http://localhost:3000/api/v1/tests/$find?locale=tr&organisation=company&application=test&search=advanced&select=name
 
 ## Running the tests
 
