@@ -1,5 +1,5 @@
 # apiogenesis
-A Restful API builder from a json schema. This project using restify@8.3.3 and mongoose@5.5.11
+A Restful API builder from a json schema. This project using restify@8.3.3 and mongoose@5.5.11.
 
 ## Supports
 * Multi language contents
