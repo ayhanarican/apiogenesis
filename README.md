@@ -14,16 +14,16 @@ You spend a lot of time on projects. Get some rest! Take time for some fun :)
 * Searching in searchable paths
 * Filtering, paging same with mongoose find
 * Property types: 
-  ** string
-  ** number
-  ** date
-  ** localized
-  ** object
-  ** array
-  ** mixed
-  ** calculated
-  ** reference
-  ** collection
+  * string
+  * number
+  * date
+  * localized
+  * object
+  * array
+  * mixed
+  * calculated
+  * reference
+  * collection
 
 ## Getting Started
 
