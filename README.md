@@ -30,7 +30,7 @@ npm install
 
 cd examples/apiogenesis-instance
 npm install
-npm run start
+npm start
 ```
 For test running application
 
