@@ -40,6 +40,10 @@ or
 
 GET http://localhost:3000/api/v1/tests/$find?locale=tr&organisation=company&application=test&search=localized
 
+or 
+
+GET http://localhost:3000/api/v1/tests/$find?locale=tr&organisation=company&application=test&filter[name]=test
+
 ## Running the tests
 
 To run test
