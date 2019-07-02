@@ -6,12 +6,24 @@ They probably question such dynamic module author under spotlights. I did this p
 You spend a lot of time on projects. Get some rest! Take time for some fun :)
 
 ## Features
-* Multi language contents
-* Relational mongodb database
-* Tree structure
+* Tree structure support
+* Relational data structure
+* Calculated properties
 * Inheritence support for types
+* Multi language contents
 * Searching in searchable paths
 * Filtering, paging same with mongoose find
+* Property types: 
+  ** string
+  ** number
+  ** date
+  ** localized
+  ** object
+  ** array
+  ** mixed
+  ** calculated
+  ** reference
+  ** collection
 
 ## Getting Started
 
