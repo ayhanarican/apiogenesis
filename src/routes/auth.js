@@ -24,13 +24,13 @@ class Auth {
             req.query.token || '';
         req._header = header;
 
-        const token = header.substr(0, 3) == "JWT"
-            ? header.toString().substr(3).trim()
-            : header.toString().trim();
+        const token = header.substr(0, 3) == "JWT" ?
+            header.toString().substr(3).trim() :
+            header.toString().trim();
 
         const manager = new AppManager(app);
 
-        if(!manager.isAppType(app.options.default.defaults.types._user._type)) {
+        if (!manager.isAppType(app.options.default.defaults.types._user._type)) {
             return next();
         }
 
@@ -55,23 +55,20 @@ class Auth {
                 const keys = Object.keys(application.defaults.types._user);
                 keys.forEach(key => selects[key] = true);
                 const query = application.builder.models[application.defaults.types._user._type]
-                    .findOne({ email: req.payload.email }, selects)
-                    .populate([
-                        {
+                    .findOne({
+                        email: req.payload.email
+                    }, selects)
+                    .populate([{
                             path: "role",
                         },
                         {
                             path: "roles",
-                            populate: [
-                                {
-                                    path: "role",
-                                    populate: [
-                                        {
-                                            path: "permissions"
-                                        }
-                                    ]
-                                }
-                            ]
+                            populate: [{
+                                path: "role",
+                                populate: [{
+                                    path: "permissions"
+                                }]
+                            }]
                         }
                     ]);
 
@@ -79,16 +76,14 @@ class Auth {
                 if (user != null) {
                     req._user = user;
                     next();
-                }
-                else {
+                } else {
                     res.send({
                         name: "UserAuthenticationError",
                         message: "User not found!",
                     });
                 }
             }
-        }
-        catch (userError) {
+        } catch (userError) {
             res.send({
                 name: "UserAuthenticationError",
                 message: "Authentication error!",
@@ -111,26 +106,22 @@ class Auth {
         try {
             if (!email) {
                 _errors.push(new Error("No email specified!"));
-            }
-            else if (!isEmail(email)) {
+            } else if (!isEmail(email)) {
                 _errors.push(new Error("Email must have an email format"));
             }
 
             if (!password) {
                 _errors.push(new Error("No password specified!"));
-            }
-            else {
+            } else {
                 if (_.has(app.options.authentication.login.password, 'minLength') && _.has(app.options.authentication.login.password, 'maxLength')) {
                     if (password.length < app.options.authentication.login.password.minLength || password.length > app.options.authentication.login.password.maxLength) {
                         _errors.push(Error(`Password length must be between ${app.options.authentication.login.password.minLength} and ${app.options.authentication.login.password.maxLength} characters.`));
                     }
-                }
-                else if (_.has(app.options.login.password, 'minLength')) {
+                } else if (_.has(app.options.login.password, 'minLength')) {
                     if (password.length < app.options.authentication.login.password.minLength) {
                         _errors.push(Error(`Password must contain at least ${app.options.authentication.login.password.minLength} characters.`));
                     }
-                }
-                else if (_.has(app.options.authentication.login.password, 'maxLength')) {
+                } else if (_.has(app.options.authentication.login.password, 'maxLength')) {
                     if (password.length > app.options.authentication.login.password.maxLength) {
                         _errors.push(Error(`Password must contain at most ${app.options.authentication.login.password.maxLength} characters.`));
                     }
@@ -154,8 +145,7 @@ class Auth {
                     errors: _errors.map(err => err.message)
                 })
             }
-        }
-        catch (error) {
+        } catch (error) {
             next(error);
         }
 
@@ -167,28 +157,24 @@ class Auth {
             keys.forEach(key => selects[key] = true);
 
             user = await application.builder.models[application.defaults.types._user._type]
-                .findOne({ email: email }, selects)
-                .populate([
-                    {
+                .findOne({
+                    email: email
+                }, selects)
+                .populate([{
                         path: "role",
                     },
                     {
                         path: "roles",
-                        populate: [
-                            {
-                                path: "role",
-                                populate: [
-                                    {
-                                        path: "permissions"
-                                    }
-                                ]
-                            }
-                        ]
+                        populate: [{
+                            path: "role",
+                            populate: [{
+                                path: "permissions"
+                            }]
+                        }]
                     }
 
                 ]).exec();
-        }
-        catch (userError) {
+        } catch (userError) {
             await utilsAsync.handleError(userError)
             res.send({
                 name: "UserAuthenticationError",
@@ -201,8 +187,7 @@ class Auth {
             if (user) {
                 try {
                     compare = await bcrypt.compare(password, user[application.defaults.types._user.password])
-                }
-                catch (compareError) {
+                } catch (compareError) {
                     res.send({
                         name: "UserAuthenticationError",
                         message: "Can't login User",
@@ -212,14 +197,13 @@ class Auth {
 
                 if (!compare) {
                     _errors.push(new Error("The password doesn't match!"));
-                }
-                else {
-                    if (app.options.authentication.login.use.indexOf("active") > -1 && 
+                } else {
+                    if (app.options.authentication.login.use.indexOf("active") > -1 &&
                         !user[application.defaults.types._user.password]) {
                         _errors.push(new Error("User not active!"));
                     }
 
-                    if (app.options.authentication.login.use.indexOf("confirmation") > -1 && 
+                    if (app.options.authentication.login.use.indexOf("confirmation") > -1 &&
                         !user[application.defaults.types._user.confirmed]) {
                         _errors.push(new Error("Confirmation required!"));
                     }
@@ -231,8 +215,7 @@ class Auth {
                         message: "Can't login user!" + email,
                         errors: _errors.map(err => err.message)
                     })
-                }
-                else {
+                } else {
 
                     const token = Auth.prepareToken(user, application);
                     const data = {
@@ -244,15 +227,13 @@ class Auth {
 
                     res.send(data);
                 }
-            }
-            else {
+            } else {
                 res.send({
                     name: "UserAuthenticationError",
                     message: "User not found!",
                 });
             }
-        }
-        catch (validationError) {
+        } catch (validationError) {
             res.send({
                 name: "UserAuthenticationError",
                 message: "Can't login User",
@@ -265,7 +246,7 @@ class Auth {
         const typeName = pluralize(req.params.type, 1);
         const manager = new AppManager(req._application.app);
 
-        if(!manager.isAppType(req._application.app.options.default.defaults.types._user._type)) {
+        if (!manager.isAppType(req._application.app.options.default.defaults.types._user._type)) {
             return next();
         }
 
@@ -292,11 +273,9 @@ class Auth {
                     utils.objectEquals(keys, readableAndWritableActions) ||
                     (typePublic.readable == false && typePublic.writable == false))) {
                 return next(new errors.UnprocessableEntityError(`All actions must be not false in options.public option of type! Type is ${typeName}`));
-            }
-            else
+            } else
                 next();
-        }
-        else {
+        } else {
             await Auth.user(req, res, next);
             if (req._user) {
                 //console.log(Auth.checkAuthorization(req._application.app, req._user, type.name));
@@ -334,29 +313,80 @@ class Auth {
         role.permissions = _.sortBy(role.permissions, ['_createdAt']);
 
         if (_.get(app, 'options.authorization') && app.options.authorization.use.indexOf("action") && app.options.authorization.use.indexOf("type")) {
-            allow = (_.some(role.permissions, { type: "*", action: '*', perm: 'allow' }) ||
-                _.some(role.permissions, { type: "*", action: action, perm: 'allow' }) ||
-                _.some(role.permissions, { type: typeName, action: '*', perm: 'allow' }) ||
-                _.some(role.permissions, { type: typeName, action: action, perm: 'allow' }))
-                &&
-                (!_.some(role.permissions, { type: "*", action: '*', perm: 'deny' }) ||
-                    !_.some(role.permissions, { type: "*", action: action, perm: 'deny' }) ||
-                    !_.some(role.permissions, { type: typeName, action: '*', perm: 'deny' }) ||
-                    !_.some(role.permissions, { type: typeName, action: action, perm: 'deny' }));
-        }
-        else if (_.get(app, 'options.authorization') && app.options.authorization.use.indexOf("action")) {
-            allow = (_.some(role.permissions, { action: '*', perm: 'allow' }) ||
-                _.some(role.permissions, { action: action, perm: 'allow' }))
-                &&
-                (!_.some(role.permissions, { action: '*', perm: 'deny' }) ||
-                    !_.some(role.permissions, { action: action, perm: 'deny' }));
-        }
-        else if (_.get(app, 'options.authorization') && app.options.authorization.use.indexOf("type")) {
-            allow = (_.some(role.permissions, { type: "*", perm: 'allow' }) ||
-                _.some(role.permissions, { type: typeName, perm: 'allow' }))
-                &&
-                (!_.some(role.permissions, { type: "*", perm: 'deny' }) ||
-                    !_.some(role.permissions, { type: typeName, perm: 'deny' }));
+            allow = (_.some(role.permissions, {
+                        type: "*",
+                        action: '*',
+                        perm: 'allow'
+                    }) ||
+                    _.some(role.permissions, {
+                        type: "*",
+                        action: action,
+                        perm: 'allow'
+                    }) ||
+                    _.some(role.permissions, {
+                        type: typeName,
+                        action: '*',
+                        perm: 'allow'
+                    }) ||
+                    _.some(role.permissions, {
+                        type: typeName,
+                        action: action,
+                        perm: 'allow'
+                    })) &&
+                (!_.some(role.permissions, {
+                        type: "*",
+                        action: '*',
+                        perm: 'deny'
+                    }) ||
+                    !_.some(role.permissions, {
+                        type: "*",
+                        action: action,
+                        perm: 'deny'
+                    }) ||
+                    !_.some(role.permissions, {
+                        type: typeName,
+                        action: '*',
+                        perm: 'deny'
+                    }) ||
+                    !_.some(role.permissions, {
+                        type: typeName,
+                        action: action,
+                        perm: 'deny'
+                    }));
+        } else if (_.get(app, 'options.authorization') && app.options.authorization.use.indexOf("action")) {
+            allow = (_.some(role.permissions, {
+                        action: '*',
+                        perm: 'allow'
+                    }) ||
+                    _.some(role.permissions, {
+                        action: action,
+                        perm: 'allow'
+                    })) &&
+                (!_.some(role.permissions, {
+                        action: '*',
+                        perm: 'deny'
+                    }) ||
+                    !_.some(role.permissions, {
+                        action: action,
+                        perm: 'deny'
+                    }));
+        } else if (_.get(app, 'options.authorization') && app.options.authorization.use.indexOf("type")) {
+            allow = (_.some(role.permissions, {
+                        type: "*",
+                        perm: 'allow'
+                    }) ||
+                    _.some(role.permissions, {
+                        type: typeName,
+                        perm: 'allow'
+                    })) &&
+                (!_.some(role.permissions, {
+                        type: "*",
+                        perm: 'deny'
+                    }) ||
+                    !_.some(role.permissions, {
+                        type: typeName,
+                        perm: 'deny'
+                    }));
         }
 
         return allow;

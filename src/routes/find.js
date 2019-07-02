@@ -34,14 +34,14 @@ class Find {
             repository = new Repository(req._application, req._user);
             repository.dataValidation(typeName, null, [], false);
             manager = new AppManager(req._application.app);
-            if(!manager.isAppType(typeName)) {
+            if (!manager.isAppType(typeName)) {
                 return next(new errors.BadRequestError("Type not in app!"));
-            }
-            else if(typeName == req._application.app.options.default.defaults.types._root.__type){
+            } 
+            else if (typeName == req._application.app.options.default.defaults.types._root.__type) {
                 return next(new errors.BadRequestError("Can not run method on _root type! _root type is abstract!"));
             }
             type = manager.getType(typeName);
-        }
+        } 
         catch (uuidError) {
             console.log(uuidError)
             return next(new errors.BadRequestError(uuidError.message));
@@ -65,28 +65,28 @@ class Find {
             cachedData = null;
         }
 
-        if (cachedData && ["true", "findAll"].indexOf(req.query.cache) > - 1) {
+        if (cachedData && ["true", "findAll"].indexOf(req.query.cache) > -1) {
             console.log(typeName, "findAll from cache");
             res.send(cachedData);
             return next();
-        }
+        } 
         else {
             try {
                 const orginalSelect = options.select;
-                const select = options.select 
-                    ? (options.select.split(' ').indexOf('_type') == -1 ? options.select + ' _type' : options.select) 
-                    : options.select;
-                if(select) options.select = select;
+                const select = options.select ?
+                    (options.select.split(' ').indexOf('_type') == -1 ? options.select + ' _type' : options.select) :
+                    options.select;
+                if (select) options.select = select;
 
                 const count = await repository.countAll(type.name);
                 const result = await repository.findAll(type.name, options);
 
-                if (options && options.populate
-                    && utils.objectEquals(options.populate, options.treePopulate))
+                if (options && options.populate &&
+                    utils.objectEquals(options.populate, options.treePopulate))
                     delete options.treePopulate;
-                if(select)
+                if (select)
                     options.select = orginalSelect;
-                
+
                 const data = {
                     success: true,
                     count: count,
@@ -109,16 +109,16 @@ class Find {
                 console.log(typeName, "findAll from db", options);
                 if (!req._user && (_.get(type, 'options.public') == true || _.get(type, 'options.public.readable') == true || _.get(type, 'options.public.findAll') == true)) {
                     res.send(data);
-                }
+                } 
                 else if (!req._user && _.get(type, 'options.public')) {
                     res.send({
                         name: "UserAuthenticationError",
                         message: "FindAll method not allowed!",
                     })
-                }
+                } 
                 else
                     res.send(data)
-            }
+            } 
             catch (error) {
                 return next(error);
             }
@@ -133,14 +133,14 @@ class Find {
             repository = new Repository(req._application, req._user);
             repository.dataValidation(typeName, null, [], false);
             manager = new AppManager(req._application.app);
-            if(!manager.isAppType(typeName)) {
+            if (!manager.isAppType(typeName)) {
                 return next(new errors.BadRequestError("Type not in app!"));
-            }
-            else if(typeName == req._application.app.options.default.defaults.types._root.__type){
+            } 
+            else if (typeName == req._application.app.options.default.defaults.types._root.__type) {
                 return next(new errors.BadRequestError("Can not run method on _root type! _root type is abstract!"));
             }
             type = manager.getType(typeName);
-        }
+        } 
         catch (uuidError) {
             return next(new errors.BadRequestError(uuidError.message));
         }
@@ -163,14 +163,14 @@ class Find {
             cachedData = null;
         }
 
-        if (cachedData && (["true", "find"].indexOf(options.cache) > - 1)) {
+        if (cachedData && (["true", "find"].indexOf(options.cache) > -1)) {
             res.send(cachedData);
-        }
+        } 
         else if (req._application) {
             try {
                 let allFilter = options.filter;
-                
-                if(options.search) {
+
+                if (options.search) {
                     const searchFilter = repository.prepareSearchFilter(typeName, options);
                     allFilter = _.assignIn(allFilter, searchFilter);
                 }
@@ -183,19 +183,19 @@ class Find {
                 }
                 */
                 const orginalSelect = options.select;
-                const select = options.select 
-                    ? (options.select.split(' ').indexOf('_type') == -1 ? options.select + ' _type' : options.select) 
-                    : options.select;
-                if(select) options.select = select;
+                const select = options.select ?
+                    (options.select.split(' ').indexOf('_type') == -1 ? options.select + ' _type' : options.select) :
+                    options.select;
+                if (select) options.select = select;
 
                 const result = await repository.find(type.name, options);
 
-                if (options && options.populate && options.populate.length
-                    && utils.objectEquals(options.populate, options.treePopulate))
+                if (options && options.populate && options.populate.length &&
+                    utils.objectEquals(options.populate, options.treePopulate))
                     delete options.treePopulate;
 
-                    if(select)
-                        options.select = orginalSelect;
+                if (select)
+                    options.select = orginalSelect;
 
                 const data = {
                     success: true,
@@ -219,16 +219,16 @@ class Find {
                 console.log(typeName, "find from db", options);
                 if (!req._user && (_.get(type, 'options.public') == true || _.get(type, 'options.public.readable') == true || _.get(type, 'options.public.find') == true)) {
                     res.send(data);
-                }
+                } 
                 else if (!req._user && _.get(type, 'options.public')) {
                     res.send({
                         name: "UserAuthenticationError",
                         message: "Find method not allowed!",
                     })
-                }
+                } 
                 else
                     res.send(data);
-            }
+            } 
             catch (error) {
                 await utilsAsync.handleError(error);
                 /*
@@ -251,15 +251,14 @@ class Find {
             repository = new Repository(req._application, req._user);
             repository.dataValidation(typeName, null, [], false);
             manager = new AppManager(req._application.app);
-            if(!manager.isAppType(typeName)) {
+            if (!manager.isAppType(typeName)) {
                 return next(new errors.BadRequestError("Type not in app!"));
-            }
-            else if(typeName == req._application.app.options.default.defaults.types._root.__type){
+            } else if (typeName == req._application.app.options.default.defaults.types._root.__type) {
                 return next(new errors.BadRequestError("Can not run method on _root type! _root type is abstract!"));
             }
             type = manager.getType(typeName);
             repository.checkId(id, null);
-        }
+        } 
         catch (uuidError) {
             return next(new errors.BadRequestError(uuidError.message));
         }
@@ -279,21 +278,22 @@ class Find {
 
         try {
             const orginalSelect = options.select;
-            const select = options.select 
-                ? (options.select.split(' ').indexOf('_type') == -1 ? options.select + ' _type' : options.select) 
-                : options.select;
-            if(select) options.select = select;
+            const select = options.select ?
+                (options.select.split(' ').indexOf('_type') == -1 ? options.select + ' _type' : options.select) :
+                options.select;
             
+            if (select) options.select = select;
+
             const result = await repository.findById(type.name, id, options);
 
-            
 
-            if (options && options.populate && options.populate.length
-                && utils.objectEquals(options.populate, options.treePopulate))
+
+            if (options && options.populate && options.populate.length &&
+                utils.objectEquals(options.populate, options.treePopulate))
                 delete options.treePopulate;
-            
+
             console.log(typeName, "findById from db id:", id);
-            
+
             options.select = orginalSelect;
 
             const data = {
@@ -309,17 +309,17 @@ class Find {
 
             if (!req._user && (_.get(type, 'options.public') == true || _.get(type, 'options.public.readable') == true || _.get(type, 'options.public.findById') == true)) {
                 res.send(data);
-            }
+            } 
             else if (!req._user && _.get(type, 'options.public')) {
                 res.send({
                     name: "UserAuthenticationError",
                     message: "FindById method not allowed!",
                 })
-            }
+            } 
             else
                 res.send(data);
             //res.send(data);
-        }
+        } 
         catch (error) {
             req._errors.push(error);
             return next(new errors.InternalServerError({
@@ -339,10 +339,10 @@ class Find {
             repository = new Repository(req._application, req._user);
             repository.dataValidation(typeName, null, [], false);
             manager = new AppManager(req._application.app);
-            if(!manager.isAppType(typeName)) {
+            if (!manager.isAppType(typeName)) {
                 return next(new errors.BadRequestError("Type not in app!"));
-            }
-            else if(typeName == req._application.app.options.default.defaults.types._root.__type){
+            } 
+            else if (typeName == req._application.app.options.default.defaults.types._root.__type) {
                 return next(new errors.BadRequestError("Can not run method on _root type! _root type is abstract!"));
             }
             type = manager.getType(typeName);
@@ -380,16 +380,16 @@ class Find {
                     name: "UserAuthenticationError",
                     message: "Aggreagate method not allowed!",
                 })
-            }
+            } 
             else if (!req._user && _.get(type, 'options.public')) {
                 res.send({
                     name: "UserAuthenticationError",
                     message: "Aggreagate method not allowed!",
                 })
-            }
+            } 
             else
                 res.send(data)
-        }
+        } 
         catch (error) {
             req._errors.push(error);
             return next(new errors.InternalServerError({

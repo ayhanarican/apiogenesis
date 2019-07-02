@@ -26,46 +26,43 @@ errorsOptions.add('errors');
 
 class Crud {
     static async create(req, res, next) {
-    try {
-        const data = req.body;
-        const typeName = data._type ? data._type : pluralize(req.params.type, 1);
-        const repository = new Repository(req._application, req._user);
-        repository.dataValidation(typeName, null, [], false);
-        const manager = new AppManager(req._application.app);
-        if(!manager.isAppType(typeName)) {
-            return next(new errors.BadRequestError("Type not in app!"));
-        }
-        else if(typeName == req._application.app.options.default.defaults.types._root.__type){
-            return next(new errors.BadRequestError("Can not run method on _root type! _root type is abstract!"));
-        }
-        const type = manager.getType(typeName);
+        try {
+            const data = req.body;
+            const typeName = data._type ? data._type : pluralize(req.params.type, 1);
+            const repository = new Repository(req._application, req._user);
+            repository.dataValidation(typeName, null, [], false);
+            const manager = new AppManager(req._application.app);
+            if (!manager.isAppType(typeName)) {
+                return next(new errors.BadRequestError("Type not in app!"));
+            } else if (typeName == req._application.app.options.default.defaults.types._root.__type) {
+                return next(new errors.BadRequestError("Can not run method on _root type! _root type is abstract!"));
+            }
+            const type = manager.getType(typeName);
 
-        if (!req._user && _.get(type, 'options.public') && !(_.get(type, 'options.public') == true || _.get(type, 'options.public.writable') == true || _.get(type, 'options.public.create') == true)) {
-            res.send({
-                name: "UserAuthenticationError",
-                message: "Create method not allowed!",
-            });
-            return;
-        }
-
-
-        const tempData = JSON.parse(JSON.stringify(data));
-        
-
-        repository.dataValidation(typeName, data, ["_type"], true);
+            if (!req._user && _.get(type, 'options.public') && !(_.get(type, 'options.public') == true || _.get(type, 'options.public.writable') == true || _.get(type, 'options.public.create') == true)) {
+                res.send({
+                    name: "UserAuthenticationError",
+                    message: "Create method not allowed!",
+                });
+                return;
+            }
 
 
-        let result;
+            const tempData = JSON.parse(JSON.stringify(data));
 
-        
+
+            repository.dataValidation(typeName, data, ["_type"], true);
+
+
+            let result;
+
+
             if (_.isArray(data)) {
-                return next(new errors.BadRequestError({
-                }, ({
+                return next(new errors.BadRequestError({}, ({
                     en: "Multiple documents create not suported!",
                     tr: "Birden fazla kayıt oluşturma desteklenmiyor!"
                 })[req._locale]));
-            }
-            else {
+            } else {
                 result = await repository.create(type.name, data);
             }
 
@@ -81,16 +78,14 @@ class Crud {
 
             if (!req._user && (_.get(type, 'options.public') == true || _.get(type, 'options.public.writable') == true || _.get(type, 'options.public.create') == true)) {
                 res.send(json);
-            }
-            else if (!req._user && _.get(type, 'options.public')) {
+            } else if (!req._user && _.get(type, 'options.public')) {
                 res.send({
                     name: "UserAuthenticationError",
                     message: "Create method not allowed!",
                 })
-            }
-            else
+            } else
                 res.send(json);
-        }
+        } 
         catch (error) {
             const allErrors = [].concat(error && error.errors ? error.errors : []).concat(req._errors);
 
@@ -100,15 +95,13 @@ class Crud {
                         errors: error.errors,
                     },
                 }, error.message));
-            }
-            else if (error instanceof CreateError || error instanceof UpdateError || error instanceof DeleteError) {
-                  return next(new errors.BadRequestError({
+            } else if (error instanceof CreateError || error instanceof UpdateError || error instanceof DeleteError) {
+                return next(new errors.BadRequestError({
                     info: {
                         errors: error.errors,
                     },
                 }, error.message));
-            }
-            else {
+            } else {
                 return next(new errors.BadRequestError({
                     //cause: error,
                     info: {
@@ -128,10 +121,10 @@ class Crud {
         const repository = new Repository(req._application, req._user);
         repository.dataValidation(typeName, null, [], false);
         const manager = new AppManager(req._application.app);
-        if(!manager.isAppType(typeName)) {
+        if (!manager.isAppType(typeName)) {
             return next(new errors.BadRequestError("Type not in app!"));
-        }
-        else if(typeName == req._application.app.options.default.defaults.types._root.__type){
+        } 
+        else if (typeName == req._application.app.options.default.defaults.types._root.__type) {
             return next(new errors.BadRequestError("Can not run method on _root type! _root type is abstract!"));
         }
         const type = manager.getType(typeName);
@@ -154,12 +147,11 @@ class Crud {
 
         try {
             if (_.isArray(data)) {
-                return next(new errors.BadRequestError({
-                }, ({
+                return next(new errors.BadRequestError({}, ({
                     en: "Multiple documents update not suported!",
                     tr: "Birden fazla kayıt güncelleme desteklenmiyor!"
                 })[req._locale]));
-            }
+            } 
             else {
                 result = await repository.update(type.name, id, data);
             }
@@ -176,16 +168,16 @@ class Crud {
 
             if (!req._user && (_.get(type, 'options.public') == true || _.get(type, 'options.public.writable') == true || _.get(type, 'options.public.update') == true)) {
                 res.send(json);
-            }
+            } 
             else if (!req._user && _.get(type, 'options.public')) {
                 res.send({
                     name: "UserAuthenticationError",
                     message: "Update method not allowed!",
                 })
-            }
+            } 
             else
                 res.send(json);
-        }
+        } 
         catch (error) {
             const allErrors = [].concat(error.errors ? error.errors : []).concat(req._errors);
             if (error instanceof RequestError) {
@@ -194,21 +186,21 @@ class Crud {
                         errors: error.errors,
                     },
                 }, error.message));
-            }
+            } 
             else if (error instanceof CreateError || error instanceof UpdateError || error instanceof DeleteError) {
                 return next(new errors.BadRequestError({
                     info: {
                         errors: error.errors,
                     },
                 }, error.message));
-            }
+            } 
             else if (error.error) {
                 return next(new errors.BadRequestError({
                     info: {
                         errors: error.error.errors,
                     },
                 }, error.error.message));
-            }
+            } 
             else {
                 console.log(error);
                 return next(new errors.BadRequestError({
@@ -226,10 +218,10 @@ class Crud {
         const repository = new Repository(req._application, req._user);
         repository.dataValidation(typeName, null, [], false);
         const manager = new AppManager(req._application.app);
-        if(!manager.isAppType(typeName)) {
+        if (!manager.isAppType(typeName)) {
             return next(new errors.BadRequestError("Type not in app!"));
-        }
-        else if(typeName == req._application.app.options.default.defaults.types._root.__type){
+        } 
+        else if (typeName == req._application.app.options.default.defaults.types._root.__type) {
             return next(new errors.BadRequestError("Can not run method on _root type! _root type is abstract!"));
         }
         const type = manager.getType(typeName);
@@ -267,16 +259,16 @@ class Crud {
 
             if (!req._user && (_.get(type, 'options.public') == true || _.get(type, 'options.public.writable') == true || _.get(type, 'options.public.delete') == true)) {
                 res.send(data);
-            }
+            } 
             else if (!req._user && _.get(type, 'options.public')) {
                 res.send({
                     name: "UserAuthenticationError",
                     message: "Delete method not allowed!",
                 })
-            }
+            } 
             else
                 res.send(data);
-        }
+        } 
         catch (error) {
             return next(error);
         }
@@ -301,15 +293,14 @@ class Crud {
 
         try {
             if (_.isArray(data)) {
-                return next(new errors.BadRequestError({
-                }, ({
+                return next(new errors.BadRequestError({}, ({
                     en: "Validate not suported for multiple documents!",
                     tr: "Birden fazla kayıt için doğrulama desteklenmiyor!"
                 })[req._locale]));
-            }
+            } 
             else if (!id) {
                 result = await repository.validateCreate(type.name, data);
-            }
+            } 
             else {
                 result = await repository.validateUpdate(type.name, id, data);
             }
@@ -325,7 +316,7 @@ class Crud {
             };
 
             res.send(json);
-        }
+        } 
         catch (error) {
             const allErrors = [].concat(error && error.errors ? error.errors : []).concat(req._errors);
 
@@ -335,21 +326,21 @@ class Crud {
                         errors: error.errors,
                     },
                 }, error.message));
-            }
+            } 
             else if (error instanceof CreateError || error instanceof UpdateError || error instanceof DeleteError) {
                 return next(new errors.BadRequestError({
                     info: {
                         errors: error.errors,
                     },
                 }, error.message));
-            }
+            } 
             else if (error.data) {
                 return next(new errors.BadRequestError({
                     info: {
                         errors: error.error.errors,
                     },
                 }, error.error.message));
-            }
+            } 
             else {
                 console.log(error);
                 return next(new errors.BadRequestError({
