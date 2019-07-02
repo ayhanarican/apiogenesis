@@ -168,11 +168,11 @@ class Find {
         }
         else if (req._application) {
             try {
-                let allFilter = null;
+                let allFilter = options.filter;
                 
                 if(options.search) {
                     const searchFilter = repository.prepareSearchFilter(typeName, options);
-                    allFilter = _.assignIn({}, searchFilter);
+                    allFilter = _.assignIn(allFilter, searchFilter);
                 }
 
                 const count = await repository.count(type.name, allFilter);
