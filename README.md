@@ -9,7 +9,7 @@ You spend a lot of time on projects. Get some rest! Take time for some fun :)
 * Multi language contents
 * Relational mongodb database
 * Tree structure
-* Multiple sort
+* Inheritence support for types
 * Searching in searchable paths
 * Filtering, paging same with mongoose find
 
