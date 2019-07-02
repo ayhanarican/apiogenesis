@@ -24,7 +24,7 @@ A step by step series of examples that tell you how to get a development env run
 Follow these simple steps to run the example application.
 
 ```
-npm install apiogenesis
+git clone https://github.com/ayhanarican/apiogenesis.git
 cd apiogenesis
 npm install
 
