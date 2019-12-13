@@ -31,6 +31,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing example project
 
+Please use node version 12.3.1
+
 A step by step series of examples that tell you how to get a development env running.
 
 Follow these simple steps to run the example application.
